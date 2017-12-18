@@ -1,6 +1,5 @@
 #include <QApplication>
 #include "gui/main_window.hpp"
-#include "input/file_worker.hpp"
 
 int main(int argc, char *argv[])
 {

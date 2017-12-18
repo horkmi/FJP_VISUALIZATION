@@ -2,7 +2,6 @@
 #define _TEXT_AREA_HPP
 
 #include <QPlainTextEdit>
-#include <QSemaphore>
 #include <time.h>
 
 class TextArea: public QPlainTextEdit
@@ -11,16 +10,12 @@ class TextArea: public QPlainTextEdit
     
     public:
         TextArea();
-        Qt::CheckState isShown();
         
     public slots:
-        void show(int state);
-        void appendHtmlPlainText(bool html, QString *htmlPlainText);
+        void appendHtmlPlainText(bool html, QString htmlPlainText);
         
     private:
-        QSemaphore semaphore;
-        bool shown;
-        void appendTime(QString *text);
+        void appendTime(QString &text);
 };
 
 #endif

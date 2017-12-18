@@ -6,11 +6,18 @@
 
 #include <QString>
 #include <QFile>
+#include <QIODevice>
+#include <QTextStream>
+
+#include <vector>
+using namespace std;
+
+#include "../inner/gram_rule.hpp"
 
 class FileWorker
 {
     public:
-        static void readGrammar();
+        static QString loadGrammar(vector<GramRule *> &grammar);
         static bool writeGrammar();
         
         static QString *readCSS();

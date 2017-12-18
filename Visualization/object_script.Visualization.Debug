@@ -1,0 +1,16 @@
+INPUT(
+./debug\visualization.o
+./debug\automaton.o
+./debug\gram_rule.o
+./debug\help.o
+./debug\main_window.o
+./debug\report.o
+./debug\table.o
+./debug\text_area.o
+./debug\file_worker.o
+./debug\moc_automaton.o
+./debug\moc_help.o
+./debug\moc_main_window.o
+./debug\moc_table.o
+./debug\moc_text_area.o
+);

@@ -1,0 +1,5 @@
+S
+S	aAS
+S	b
+A	a
+A	bSA
