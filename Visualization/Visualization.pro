@@ -10,3 +10,6 @@ LIBS += -pthread
 
 HEADERS += src/inner/*.hpp src/gui/*.hpp src/input/*.hpp
 SOURCES += src/*.cpp src/inner/*.cpp src/gui/*.cpp src/input/*.cpp
+
+# Icon
+win32:RC_ICONS += img/app.ico

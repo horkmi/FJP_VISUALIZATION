@@ -17,13 +17,13 @@ CXXFLAGS      = -fno-keep-inline-dllexport -std=c++0x -pthread -g -std=gnu++11 -
 INCPATH       = -I. -I. -IC:\Qt\5.10.1\mingw53_32\include -IC:\Qt\5.10.1\mingw53_32\include\QtWidgets -IC:\Qt\5.10.1\mingw53_32\include\QtGui -IC:\Qt\5.10.1\mingw53_32\include\QtANGLE -IC:\Qt\5.10.1\mingw53_32\include\QtCore -Idebug -IC:\Qt\5.10.1\mingw53_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,console -mthreads
-LIBS        =        -pthread -LC:\Qt\5.10.1\mingw53_32\lib C:\Qt\5.10.1\mingw53_32\lib\libQt5Widgetsd.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Guid.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Cored.a 
+LIBS        =        -pthread -LC:\Qt\5.10.1\mingw53_32\lib C:\Qt\5.10.1\mingw53_32\lib\libQt5Widgetsd.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Guid.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Cored.a debug\Visualization_resource_res.o 
 QMAKE         = C:\Qt\5.10.1\mingw53_32\bin\qmake.exe
 IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\Visualization_resource_res.o
 COPY          = copy /y
 SED           = $(QMAKE) -install sed
 COPY_FILE     = copy /y
@@ -99,8 +99,11 @@ DESTDIR_TARGET = debug\Visualization.exe
 first: all
 all: Makefile.Debug  $(DESTDIR_TARGET)
 
-$(DESTDIR_TARGET):  $(OBJECTS) 
+$(DESTDIR_TARGET):  $(OBJECTS) debug/Visualization_resource_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) object_script.Visualization.Debug  $(LIBS)
+
+debug/Visualization_resource_res.o: Visualization_resource.rc
+	windres -i Visualization_resource.rc -o debug\Visualization_resource_res.o --include-dir=. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug Visualization.pro
@@ -112,6 +115,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) debug\visualization.o debug\automaton.o debug\gram_rule.o debug\help.o debug\main_window.o debug\report.o debug\table.o debug\text_area.o debug\file_worker.o debug\moc_automaton.o debug\moc_help.o debug\moc_main_window.o debug\moc_table.o debug\moc_text_area.o
+	-$(DEL_FILE) debug\Visualization_resource_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash

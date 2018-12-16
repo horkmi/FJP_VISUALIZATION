@@ -17,13 +17,13 @@ CXXFLAGS      = -fno-keep-inline-dllexport -std=c++0x -pthread -O2 -std=gnu++11 
 INCPATH       = -I. -I. -IC:\Qt\5.10.1\mingw53_32\include -IC:\Qt\5.10.1\mingw53_32\include\QtWidgets -IC:\Qt\5.10.1\mingw53_32\include\QtGui -IC:\Qt\5.10.1\mingw53_32\include\QtANGLE -IC:\Qt\5.10.1\mingw53_32\include\QtCore -Irelease -IC:\Qt\5.10.1\mingw53_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,console -mthreads
-LIBS        =        -pthread -LC:\Qt\5.10.1\mingw53_32\lib C:\Qt\5.10.1\mingw53_32\lib\libQt5Widgets.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Gui.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Core.a 
+LIBS        =        -pthread -LC:\Qt\5.10.1\mingw53_32\lib C:\Qt\5.10.1\mingw53_32\lib\libQt5Widgets.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Gui.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Core.a release\Visualization_resource_res.o 
 QMAKE         = C:\Qt\5.10.1\mingw53_32\bin\qmake.exe
 IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = release\Visualization_resource_res.o
 COPY          = copy /y
 SED           = $(QMAKE) -install sed
 COPY_FILE     = copy /y
@@ -99,8 +99,11 @@ DESTDIR_TARGET = release\Visualization.exe
 first: all
 all: Makefile.Release  $(DESTDIR_TARGET)
 
-$(DESTDIR_TARGET):  $(OBJECTS) 
+$(DESTDIR_TARGET):  $(OBJECTS) release/Visualization_resource_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) object_script.Visualization.Release  $(LIBS)
+
+release/Visualization_resource_res.o: Visualization_resource.rc
+	windres -i Visualization_resource.rc -o release\Visualization_resource_res.o --include-dir=. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Release Visualization.pro
@@ -112,6 +115,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) release\visualization.o release\automaton.o release\gram_rule.o release\help.o release\main_window.o release\report.o release\table.o release\text_area.o release\file_worker.o release\moc_automaton.o release\moc_help.o release\moc_main_window.o release\moc_table.o release\moc_text_area.o
+	-$(DEL_FILE) release\Visualization_resource_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
