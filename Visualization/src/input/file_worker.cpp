@@ -50,15 +50,15 @@ bool FileWorker::writeGrammar()
     return true;
 }
 
-QString *FileWorker::readCSS()
+QString FileWorker::readCSS()
 {
-    QString *result = new QString();
+    QString results;
     
     QFile file(FILE_CSS);
     if (file.open(QFile::ReadOnly))
     {
-        result->append(QLatin1String(file.readAll()));
+        results.append(QLatin1String(file.readAll()));
     }
     
-    return result;
+    return results;
 }

@@ -4,10 +4,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    
-    QString *css = FileWorker::readCSS();
-    app.setStyleSheet(*css);
-    delete css;
+    app.setStyleSheet(FileWorker::readCSS());
     
     MainWindow window;
     window.show();

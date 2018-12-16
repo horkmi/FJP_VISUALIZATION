@@ -1,0 +1,40 @@
+QTableView {
+    selection-background-color: #989721;
+}
+
+/* ---- */
+
+QLabel#control {
+    min-height: 25px;
+    min-width: 25px;
+    max-height: 25px;
+    max-width: 25px;
+    border-radius: 12px;
+    margin-left: 10px;
+}
+
+QLabel#control[value="accept"] {
+    background-color: rgb(7, 160, 5);
+}
+
+QLabel#control[value="not"] {
+    background-color: rgb(211, 0, 0);
+}
+
+/* ---- */
+
+QLabel#inputText {
+    font-size: 25px;
+}
+
+QLabel#inputText[value="done"] {
+    color: rgb(7, 160, 5);
+}
+
+QLabel#inputText[value="processing"] {
+    color: rgb(255, 158, 0);
+}
+
+QLabel#inputText[value="future"] {
+    color: rgb(211, 0, 0);
+}

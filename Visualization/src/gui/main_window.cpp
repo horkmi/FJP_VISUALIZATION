@@ -97,7 +97,7 @@ void MainWindow::createMenu()
 
 void MainWindow::showAbout()
 {
-    QMessageBox::about(this, tr("O aplikaci"), trUtf8("Aplikace byla vytvořena jako semestrální práce z předmětu KIV/FJP.\nAutor: Michal Horký (A17N0031P)"));
+    QMessageBox::about(this, tr("O aplikaci"), trUtf8("Aplikace byla vytvořena jako semestrální práce z předmětu KIV/FJP.\nAutor: Michal Horký (A18N0087P)"));
 }
 
 void MainWindow::message(bool html, QString message)

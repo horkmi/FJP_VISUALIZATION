@@ -20,7 +20,7 @@ class FileWorker
         static QString loadGrammar(vector<GramRule *> &grammar);
         static bool writeGrammar();
         
-        static QString *readCSS();
+        static QString readCSS();
 };
 
 #endif

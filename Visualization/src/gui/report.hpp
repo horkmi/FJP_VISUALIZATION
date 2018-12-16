@@ -1,5 +1,5 @@
-#ifndef _REPORT_H
-#define _REPORT_H
+#ifndef _REPORT_HPP
+#define _REPORT_HPP
 
 #include <QObject>
 #include <QWidget>
