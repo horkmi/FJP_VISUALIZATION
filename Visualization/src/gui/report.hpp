@@ -9,6 +9,7 @@
 #include <QPushButton>
 
 bool confirmDialog(QWidget *parent, const QString &title, const QString &message);
+short confirmDialogForEditor(QWidget *parent);
 void infoDialog(QWidget *parent, const QString &title, const QString &message);
 void errorDialog(QWidget *parent, const QString &title, const QString &message);
 

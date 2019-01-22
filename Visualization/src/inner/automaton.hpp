@@ -1,58 +1,76 @@
 #ifndef _AUTOMATON_HPP
 #define _AUTOMATON_HPP
 
-#include <QThread>
-#include <QStack>
-#include "../input/file_worker.hpp"
+#include <QDebug>
+#include <QTimer>
 
-class Automaton: public QThread
+#include "history.hpp"
+#include "stack.hpp"
+#include "../io/file_worker.hpp"
+
+class Automaton: public QObject
 {
     Q_OBJECT
     
     public:
-        vector<GramRule *> grammar; // Prepisovaci pravidla.
-        vector<QString> nonterminals; // Radky rozkladove tabulky.
-        vector<QString> terminals; // Slupce rozkladove tabulky.
-        QStack<QString> stack; // Zasobnik.
+        static const QString DEFAULT_INPUT;
         
-        short r, c;
-        short **table;
-        
-        Automaton();
+        Automaton(QObject *parent = nullptr);
         ~Automaton();
-        void end();
         
-    protected:
-        void run();
+        // --- OVLADANI ANIMACE ---
+        void play();
+        void pause();
+        void prevStep();
+        void nextStep();
+        void reset();
+        void changeWaiting(double speed);
+        void setInput(const QString &input);
+        // ------------------------
+        
+        bool hasHistory();
+        
+        Grammar &getGrammar();
+        Stack &getStack();
+        const QStringList &getResultingRules();
+        QString getDonePart();
+        QString getProcessingPart();
+        QString getWaitingPart();
         
     private:
-        unsigned short mWaiting;
+        static const unsigned short BASE_MILLI_WAITING;
         
-        bool active;
-        bool running;
+        bool end;
+        QTimer *timer;
+        unsigned short milliWaiting;
         
-        QString sSymbol;
-        QString input;
-        QString result;
+        Grammar grammar; // Gramatika.
+        Stack stack; // Zasobnik.
+        QList<History> changes; // Stavy (resp. zmeny) v historii.
+        
+        QStringList input; // Rozparsovany vstup.
+        int inputIndex;
+        QStringList resultingRules; // Vysledne indexy pravidel.
         
         void endProcessing(bool accept);
-        void printState(bool wait);
-        void createTable();
+        void printState();
+        
+    private slots:
+        void oneStep();
         
     signals:
-        // TODO
-        void setGrammar();
-        void setStack();
-        void setTable();
+        void hasNewHistory();
+        void hasNotHistory();
+        void hasNextStep();
         
+        void clearSelection();
         void selectGrammarRow(int index);
-        void selectStackRow(int index);
-        void selectCell(int row, int column);
+        void selectParsingTableCell(int row, int column);
         
         void processResult(bool accept);
         void message(bool html, QString message);
         
-        void inputChanged(QString done, QString process, QString future);
+        void inputChanged();
 };
 
 #endif

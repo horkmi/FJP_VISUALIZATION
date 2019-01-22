@@ -1,0 +1,43 @@
+download
+https://graphviz.gitlab.io/_pages/Download/Download_windows.html
+
+set the path
+
+create D:\bin_tree.txt
+
+    digraph bin_tree_5 {
+      rankdir=BT
+      node [style=filled fillcolor=white]
+      "1" [fillcolor=yellow]
+      "2" [fillcolor=yellow]
+      "3" [fillcolor=yellow]
+      "4" [fillcolor=yellow]
+      "5" [fillcolor=yellow]
+      "1" -> "12"
+      "2" -> "12"
+      "3" -> "34"
+      "4" -> "34"
+      "12" -> "1234"
+      "34" -> "1234"
+      "1234" -> "12345"
+      "5" -> "12345"
+    }
+
+OR
+
+graph ""
+{
+   label="(EXP (* (X) (X)))"
+   n018 ;
+   n018 [label="EXP"] ;
+   n018 -- n019 ;
+   n019 [label="*"] ;
+   n019 -- n020 ;
+   n020 [label="X"] ;
+   n019 -- n021 ;
+   n021 [label="X"] ;
+}
+
+dot -Tpng -O bin_tree.txt
+
+result is bin_tree_txt.png

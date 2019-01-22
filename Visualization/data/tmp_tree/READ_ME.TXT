@@ -1,0 +1,1 @@
+Slozku neodstranovat - dulezita pro vytvareni obrazku derivacniho stromu.

@@ -2,7 +2,7 @@
 #define _TABLE_HPP
 
 #define GRAMMAR_TABLE 0
-#define DECOMP_TABLE 1
+#define PARSING_TABLE 1
 #define STACK_TABLE 2
 
 #include <QWidget>
@@ -15,6 +15,7 @@
 #include <QDesktopWidget>
 #include <QHeaderView>
 #include <QStringList>
+#include <QMouseEvent>
 
 #include "../inner/automaton.hpp"
 
@@ -24,21 +25,31 @@ class Table: public QTableWidget
     
     public:
         Table(const short type, Automaton *automaton, QWidget *parent = 0);
-        ~Table();
+        
+    public slots:
+        void set();
+        
+        /*
+         * Blokovat akce mysi na vsechny tabulky (nechceme, aby uzivatel zasahoval do animace).
+         */         
+    protected:
+        void mouseDoubleClickEvent(QMouseEvent */*event*/) {};
+        void mouseMoveEvent(QMouseEvent */*event*/) {};
+        void mousePressEvent(QMouseEvent */*event*/) {};
+        void mouseReleaseEvent(QMouseEvent */*event*/) {};
         
     private:
-        bool gTable, dTable, sTable;
+        bool gTable, pTable, sTable;
         Automaton *automaton;
         
-        QStringList hor, ver;
+        int actRow;
+        
+        void changeStyleBack();
         
     private slots:
-        void setGrammar();
-        void setTable();
-        void setStack();
-        
         void selectRow(int index);
         void selectCell(int row, int column);
+        void clearSelection();
 };
 
 #endif

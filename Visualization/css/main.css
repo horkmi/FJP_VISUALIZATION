@@ -1,40 +1,191 @@
-QTableView {
-    selection-background-color: #989721;
+/* --- PRO MOZNOST KOPIROVANI TEXTU --- */
+
+QMessageBox {
+    messagebox-text-interaction-flags: 5;
 }
 
-/* ---- */
+/* --- TABULKY --- */
+
+QTableView {
+    selection-background-color: #989721;
+    selection-color: white;
+}
+
+QLabel#grammar_table[value="rule"] {
+    padding-left: 1px;
+}
+
+/* --- KONTROLKA PRO AKCEPTACI VSTUPNIHO RETEZCE --- */
 
 QLabel#control {
-    min-height: 25px;
-    min-width: 25px;
-    max-height: 25px;
-    max-width: 25px;
-    border-radius: 12px;
-    margin-left: 10px;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 QLabel#control[value="accept"] {
-    background-color: rgb(7, 160, 5);
-}
-
-QLabel#control[value="not"] {
-    background-color: rgb(211, 0, 0);
-}
-
-/* ---- */
-
-QLabel#inputText {
-    font-size: 25px;
-}
-
-QLabel#inputText[value="done"] {
     color: rgb(7, 160, 5);
 }
 
-QLabel#inputText[value="processing"] {
+QLabel#control[value="processing"] {
     color: rgb(255, 158, 0);
 }
 
-QLabel#inputText[value="future"] {
+QLabel#control[value="not"] {
     color: rgb(211, 0, 0);
+}
+
+/* --- VSTUPNI RETEZEC --- */
+
+QLabel#inputText {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* --- NADPISY --- */
+
+QLabel#titleText {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* --- OVLADANI ANIMACE --- */
+
+QPushButton#action {
+    max-height: 30px;
+    max-width: 40px;
+    min-height: 30px;
+    min-width: 40px;
+    border: none;
+}
+
+QPushButton#action[button="play"] {
+    background-image: url(../img/play.png);
+}
+QPushButton#action[button="play"]:hover {
+    background-image: url(../img/play_h.png);
+}
+QPushButton#action[button="play"]:pressed {
+    background-image: url(../img/play_p.png);
+}
+QPushButton#action[button="play"]:!enabled {
+    background-image: url(../img/play_d.png);
+}
+
+QPushButton#action[button="pause"] {
+    background-image: url(../img/pause.png);
+}
+QPushButton#action[button="pause"]:hover {
+    background-image: url(../img/pause_h.png);
+}
+QPushButton#action[button="pause"]:pressed {
+    background-image: url(../img/pause_p.png);
+}
+QPushButton#action[button="pause"]:!enabled {
+    background-image: url(../img/pause_d.png);
+}
+
+QPushButton#action[button="prev"] {
+    background-image: url(../img/prev.png);
+}
+QPushButton#action[button="prev"]:hover {
+    background-image: url(../img/prev_h.png);
+}
+QPushButton#action[button="prev"]:pressed {
+    background-image: url(../img/prev_p.png);
+}
+QPushButton#action[button="prev"]:!enabled {
+    background-image: url(../img/prev_d.png);
+}
+
+QPushButton#action[button="next"] {
+    background-image: url(../img/next.png);
+}
+QPushButton#action[button="next"]:hover {
+    background-image: url(../img/next_h.png);
+}
+QPushButton#action[button="next"]:pressed {
+    background-image: url(../img/next_p.png);
+}
+QPushButton#action[button="next"]:!enabled {
+    background-image: url(../img/next_d.png);
+}
+
+QPushButton#action[button="reset"] {
+    background-image: url(../img/reset.png);
+}
+QPushButton#action[button="reset"]:hover {
+    background-image: url(../img/reset_h.png);
+}
+QPushButton#action[button="reset"]:pressed {
+    background-image: url(../img/reset_p.png);
+}
+QPushButton#action[button="reset"]:!enabled {
+    background-image: url(../img/reset_d.png);
+}
+
+QPushButton#action[button="slower"] {
+    background-image: url(../img/slower.png);
+}
+QPushButton#action[button="slower"]:hover {
+    background-image: url(../img/slower_h.png);
+}
+QPushButton#action[button="slower"]:pressed {
+    background-image: url(../img/slower_p.png);
+}
+QPushButton#action[button="slower"]:!enabled {
+    background-image: url(../img/slower_d.png);
+}
+
+QPushButton#action[button="faster"] {
+    background-image: url(../img/faster.png);
+}
+QPushButton#action[button="faster"]:hover {
+    background-image: url(../img/faster_h.png);
+}
+QPushButton#action[button="faster"]:pressed {
+    background-image: url(../img/faster_p.png);
+}
+QPushButton#action[button="faster"]:!enabled {
+    background-image: url(../img/faster_d.png);
+}
+
+QPushButton#action[button="input"] {
+    background-image: url(../img/input.png);
+}
+QPushButton#action[button="input"]:hover {
+    background-image: url(../img/input_h.png);
+}
+QPushButton#action[button="input"]:pressed {
+    background-image: url(../img/input_p.png);
+}
+QPushButton#action[button="input"]:!enabled {
+    background-image: url(../img/input_d.png);
+}
+
+QPushButton#action[button="choose"] {
+    background-image: url(../img/choose.png);
+}
+QPushButton#action[button="choose"]:hover {
+    background-image: url(../img/choose_h.png);
+}
+QPushButton#action[button="choose"]:pressed {
+    background-image: url(../img/choose_p.png);
+}
+QPushButton#action[button="choose"]:!enabled {
+    background-image: url(../img/choose_d.png);
+}
+
+QPushButton#action[button="edit"] {
+    background-image: url(../img/edit.png);
+}
+QPushButton#action[button="edit"]:hover {
+    background-image: url(../img/edit_h.png);
+}
+QPushButton#action[button="edit"]:pressed {
+    background-image: url(../img/edit_p.png);
+}
+QPushButton#action[button="edit"]:!enabled {
+    background-image: url(../img/edit_d.png);
 }
