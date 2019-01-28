@@ -9,18 +9,12 @@ Grammar::Grammar(QObject *parent): QObject(parent)
 
 Grammar::~Grammar()
 {
-    for (int i = 0; i < getNonterminalsSize(); i++)
-    {
-        delete[] table[i];
-    }
-    delete[] table;
+    clearTable();
 }
 
 bool Grammar::isCorrect()
 {
-    // TODO
-    createTable();
-    return true;
+    return createTable();
 }
 
 void Grammar::clear()
@@ -28,7 +22,7 @@ void Grammar::clear()
     reset();
 }
 
-void Grammar::createTable()
+bool Grammar::createTable()
 {
     // Vytvoreni rozkladove tabulky - nezapomenout, ze u nonterminals a terminals jsou na nultych indexech blokace.
     table = new short*[getNonterminalsSize()];
@@ -57,8 +51,9 @@ void Grammar::createTable()
                 int column = firstTerminals[j].getFirstTerminals().at(k) - 1;
                 if (table[i][column] >= 0)
                 {
-                    // TODO V dane bunce je uz jine cislo.
-                    qDebug() << "FIRST: Gramatika neni LL(1).";
+                    // V dane bunce je uz jine cislo.
+                    qDebug() << "FF kolize = gramatika neni LL(1).";
+                    return false;
                 }
                 else
                 {
@@ -74,14 +69,15 @@ void Grammar::createTable()
         
         QList<int> forbidden;
         QList<int> followTerminals = follow(i + 1, forbidden);
-        
         for (int j = 0; j < followTerminals.size(); j++)
         {
             int column = followTerminals.at(j) - 1;
-            if (table[i][column] >= 0)
+            // Pro jednoduchost kontrolovat dulicitni indexy az tady.
+            if (table[i][column] >= 0 && table[i][column] != mustBeFollow)
             {
-                // TODO V dane bunce je uz jine cislo.
-                // qDebug() << "FOLLOW: Gramatika neni LL(1).";
+                // V dane bunce je uz jine cislo.
+                qDebug() << "FFL kolize = gramatika neni LL(1).";
+                return false;
             }
             else
             {
@@ -89,11 +85,10 @@ void Grammar::createTable()
             }
         }
     }
+    
+    return true;
 }
 
-// @param index = index neterminalu, pro ktery se maji najit prvni terminaly.
-// @return nalezene prvni terminaly pro dany neterminal v podobe seznamu objektu,
-//         ktere mapuji index prepisovaciho pravidla na seznam terminalu.
 QList<FirstTerminals> Grammar::first(int nonterminalIndex)
 {
     // Indexy (kladne) prvnich terminalu.
@@ -161,34 +156,34 @@ QList<int> Grammar::follow(int nonterminalIndex, QList<int> &forbidden)
     QList<int> results;
     if (!forbidden.contains(nonterminalIndex))
     {
-    forbidden.append(nonterminalIndex);
-    for (int i = 0; i < rules.size(); i++)
-    {
-        // Indexy daneho neterminalu ve vybranem pravidle.
-        QList<int> nonterminalIndices = rules[i].findNonterminal(nonterminalIndex);
-        
-        for (int j = 0; j < nonterminalIndices.size(); j++)
+        forbidden.append(nonterminalIndex);
+        for (int i = 0; i < rules.size(); i++)
         {
-            FirstTerminals followTerminals = applyFirstRules(i, nonterminalIndices.at(j) + 1);
-            if (followTerminals.containsEmptySymbol())
+            // Indexy daneho neterminalu ve vybranem pravidle.
+            QList<int> nonterminalIndices = rules[i].findNonterminal(nonterminalIndex);
+            
+            for (int j = 0; j < nonterminalIndices.size(); j++)
             {
-                followTerminals.removeEmptySymbol();
-                results.append(followTerminals.getFirstTerminals());
-                results.append(follow(rules[i].getNonterminal(), forbidden));
-            }
-            else if (nonterminalIndices.at(j) + 1 >= rules[i].getRule().size())
-            {
-                // Znak je na konci (do mnoziny spadnou nasledujici terminaly z neterminalu na leve strane
-                // pravidla a v tabulce se vyplni polozka ve sloupecku EMPTY).
-                results.append(follow(rules[i].getNonterminal(), forbidden));
-                results.append(terminals.size()); // Predstavujici EMPTY (neni ani terminal ani neterminal -> neni ulozeny v seznamu - vsude se s nim pracuje jako s nulou, pouze pro graficky vystup jde o index sloupce v tabulce).
-            }
-            else
-            {
-                results.append(followTerminals.getFirstTerminals());
+                FirstTerminals followTerminals = applyFirstRules(i, nonterminalIndices.at(j) + 1);
+                if (followTerminals.containsEmptySymbol())
+                {
+                    followTerminals.removeEmptySymbol();
+                    results.append(followTerminals.getFirstTerminals());
+                    results.append(follow(rules[i].getNonterminal(), forbidden));
+                }
+                else if (nonterminalIndices.at(j) + 1 >= rules[i].getRule().size())
+                {
+                    // Znak je na konci (do mnoziny spadnou nasledujici terminaly z neterminalu na leve strane
+                    // pravidla a v tabulce se vyplni polozka ve sloupecku EMPTY).
+                    results.append(follow(rules[i].getNonterminal(), forbidden));
+                    results.append(terminals.size()); // Predstavujici EMPTY (neni ani terminal ani neterminal -> neni ulozeny v seznamu - vsude se s nim pracuje jako s nulou, pouze pro graficky vystup jde o index sloupce v tabulce).
+                }
+                else
+                {
+                    results.append(followTerminals.getFirstTerminals());
+                }
             }
         }
-    }
     }
     return results;
 }
@@ -313,6 +308,7 @@ int Grammar::getNonterminalsSize()
 
 void Grammar::setGrammarTable(QTableWidget &table)
 {
+    table.setRowCount(0); // Vymaze vsechny radky.
     table.setRowCount(rules.size());
     
     QStringList ver;
@@ -335,6 +331,10 @@ void Grammar::setGrammarTable(QTableWidget &table)
 void Grammar::setParsingTable(QTableWidget &table)
 {
     // Probiha jednou, pouze po nacteni gramatiky.
+    
+    // Vymazat vsechny radky a sloupce.
+    table.setRowCount(0);
+    table.setColumnCount(0);
     
     table.setRowCount(getNonterminalsSize());
     table.setColumnCount(getTerminalsSize() + 1); // +1 kvuli EMPTY.
@@ -507,7 +507,18 @@ void Grammar::reset()
     nonterminals.clear();
     rules.clear();
     rulesIndices.clear();
+    clearTable();
     
     terminals.append("BLOCKED INDEX");
     nonterminals.append("BLOCKED INDEX");
+}
+
+void Grammar::clearTable()
+{
+    for (int i = 0; i < getNonterminalsSize(); i++)
+    {
+        delete[] table[i];
+    }
+    delete[] table;
+    table = nullptr;
 }

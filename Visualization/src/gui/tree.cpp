@@ -34,8 +34,10 @@ Tree::Tree(QWidget *parent): QMainWindow(parent)
 
 Tree::~Tree()
 {
+    // Zastavit pripadne bezici casovac.
     timer->stop();
     delete timer;
+    
     widget->deleteLater();
 }
 
@@ -47,7 +49,9 @@ void Tree::createNewTree(const QString &dot)
         // Zkusit trikrat ulozit soubor s grafem.
         if (FileWorker::saveDot(dot))
         {
+            // Spustit prikaz pro vygenerovani obrazku.
             process.start("dot", QStringList() << "-Tpng" << "-O" << FileWorker::getTreeTxtPath());
+            // Vynulovat a spustit casovac.
             timeCounter = 0;
             timer->start(MILLI_TIME);
             break;
@@ -59,8 +63,10 @@ void Tree::showImage()
 {
     treeImage = FileWorker::loadPng();
     tree.setPixmap(QPixmap::fromImage(treeImage));
+    // Odstranit textak i obrazek.
     FileWorker::deleteTmpData();
     save.setEnabled(true);
+    // Zobrazit okno.
     show();
 }
 
@@ -72,6 +78,7 @@ void Tree::controlPngExists()
         timer->stop();
         if (pngExists)
         {
+            // Pokud obrazek existuje, nacist, apod.
             showImage();
         }
     }

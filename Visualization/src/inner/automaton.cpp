@@ -1,16 +1,15 @@
 #include "automaton.hpp"
 
-const QString Automaton::DEFAULT_INPUT = trUtf8("Kliknutím na tužku nastavíte vstupní text...");
 const unsigned short Automaton::BASE_MILLI_WAITING = 2000;
 
-Automaton::Automaton(QObject *parent): QObject(parent)
+Automaton::Automaton(const QString &input, QObject *parent): QObject(parent)
 {
     end = false;
     milliWaiting = BASE_MILLI_WAITING;
     timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(oneStep()));
     
-    setInput(Automaton::DEFAULT_INPUT);
+    setInput(input);
     inputIndex = -1;
 }
 
@@ -128,8 +127,7 @@ void Automaton::changeWaiting(double speed)
 
 void Automaton::setInput(const QString &input)
 {
-    this->input = input.split(" ");
-    emit inputChanged();
+    this->input = input.split(" ", QString::SkipEmptyParts);
 }
 
 // ----------------------------------------------------------------------------

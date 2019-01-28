@@ -9,6 +9,7 @@ void Stack::append(Rule rule)
     
     if (rule.getRule().size() > 0)
     {
+        // Zmenit vzhled az po pridani vsech casti prepisovaciho pravidla.
         emit changed();
     }
 }
@@ -24,6 +25,7 @@ int Stack::pop(int count)
     int value;
     do
     {
+        // Odebrat pozadovany pocet hodnot a uchovat posledni.
         value = stack.pop();
     }
     while (--count > 0);
@@ -44,8 +46,10 @@ void Stack::clear()
 
 void Stack::setStackTable(QTableWidget &table, Grammar &grammar)
 {
+    table.setRowCount(0); // Vymaze vsechny radky.
     table.setRowCount(stack.size());
     
+    // Nastavit popisy radku.
     QStringList ver;
     for (int i = 0; i < stack.size(); i++)
     {
@@ -60,6 +64,7 @@ void Stack::setStackTable(QTableWidget &table, Grammar &grammar)
     }
     table.setVerticalHeaderLabels(ver);
     
+    // Provest naplneni tabulky.
     for (int i = 0; i < stack.size(); i++)
     {
         QLabel *label = new QLabel(grammar.indexToString(stack.at(i)));

@@ -1,0 +1,8 @@
+ZAČÁTEK : DRUHÝ PRVNÍ ;
+PRVNÍ : ε ;
+PRVNÍ : "+" ZAČÁTEK ;
+DRUHÝ : ČTVRTÝ TŘETÍ ;
+TŘETÍ : ε ;
+TŘETÍ : "*" DRUHÝ ;
+ČTVRTÝ : "číslo" ;
+ČTVRTÝ : '(' ZAČÁTEK ')' ;

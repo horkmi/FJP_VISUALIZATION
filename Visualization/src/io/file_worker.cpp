@@ -14,7 +14,6 @@ QString FileWorker::getTreePngPath()
 
 bool FileWorker::saveDot(const QString &dot)
 {
-    // Vyuzit funkci pro ulozeni gramatiky do souboru (diky jeji univerzalnosti).
     return FileWorker::saveFileContent(dot, FileWorker::getTreeTxtPath());
 }
 

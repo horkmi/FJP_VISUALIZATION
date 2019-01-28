@@ -72,6 +72,7 @@
 #define __DECIMAL_DIG__ 21
 #define __has_include_next(STR) __has_include_next__(STR)
 #define __LDBL_HAS_QUIET_NAN__ 1
+#define _REENTRANT 1
 #define __GNUC__ 5
 #define _cdecl __attribute__((__cdecl__))
 #define __GXX_RTTI 1

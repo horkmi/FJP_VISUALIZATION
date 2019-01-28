@@ -22,6 +22,7 @@ Table::Table(const short type, Automaton *automaton, QWidget *parent): QTableWid
     {
         case GRAMMAR_TABLE:
             {
+            // TABULKA PRO GRAMATIKU.
             setSelectionBehavior(QAbstractItemView::SelectRows);
             setColumnCount(2);
             
@@ -34,11 +35,13 @@ Table::Table(const short type, Automaton *automaton, QWidget *parent): QTableWid
             }
             break;
         case PARSING_TABLE:
+            // PRECHODOVA TABULKA.
             pTable = true;
             QObject::connect(automaton, SIGNAL(selectParsingTableCell(int, int)), this, SLOT(selectCell(int, int)));
             break;
         default:
             {
+            // TABULKA PRO ZASOBNIK.
             setSelectionBehavior(QAbstractItemView::SelectRows);
             setColumnCount(1);
             
@@ -59,14 +62,17 @@ void Table::set()
 {
     if (gTable)
     {
+        // Naplneni tabulky gramatika.
         automaton->getGrammar().setGrammarTable(*this);
     }
     else if (pTable)
     {
+        // Naplneni prechodove tabulky.
         automaton->getGrammar().setParsingTable(*this);
     }
     else
     {
+        // Naplneni zasobnikove tabulky.
         automaton->getStack().setStackTable(*this, automaton->getGrammar());
     }
 }
@@ -75,6 +81,8 @@ void Table::selectRow(int index)
 {
     if (gTable)
     {
+        // U tabulky gramatika je zapotrebi manualne menit styly u druheho
+        // sloupecku, do ktereho jsou vkladany labely.
         changeStyleBack();
         QLabel *label = dynamic_cast<QLabel *>(cellWidget(index, 1));
         label->setStyleSheet("color: white;");

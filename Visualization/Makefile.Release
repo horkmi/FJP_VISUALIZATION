@@ -13,11 +13,11 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -fno-keep-inline-dllexport -O2 -Wall -W -Wextra $(DEFINES)
-CXXFLAGS      = -fno-keep-inline-dllexport -std=c++0x -pthread -O2 -std=gnu++11 -Wall -W -Wextra -fexceptions -mthreads $(DEFINES)
+CXXFLAGS      = -fno-keep-inline-dllexport -O2 -std=gnu++11 -Wall -W -Wextra -fexceptions -mthreads $(DEFINES)
 INCPATH       = -I. -I. -IC:\Qt\5.10.1\mingw53_32\include -IC:\Qt\5.10.1\mingw53_32\include\QtWidgets -IC:\Qt\5.10.1\mingw53_32\include\QtGui -IC:\Qt\5.10.1\mingw53_32\include\QtANGLE -IC:\Qt\5.10.1\mingw53_32\include\QtCore -Irelease -IC:\Qt\5.10.1\mingw53_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,console -mthreads
-LIBS        =        -pthread -LC:\Qt\5.10.1\mingw53_32\lib C:\Qt\5.10.1\mingw53_32\lib\libQt5Widgets.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Gui.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Core.a release\Visualization_resource_res.o 
+LIBS        =        -LC:\Qt\5.10.1\mingw53_32\lib C:\Qt\5.10.1\mingw53_32\lib\libQt5Widgets.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Gui.a C:\Qt\5.10.1\mingw53_32\lib\libQt5Core.a release\Visualization_resource_res.o 
 QMAKE         = C:\Qt\5.10.1\mingw53_32\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -174,7 +174,7 @@ compiler_moc_predefs_make_all: release/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) release\moc_predefs.h
 release/moc_predefs.h: C:/Qt/5.10.1/mingw53_32/mkspecs/features/data/dummy.cpp
-	g++ -fno-keep-inline-dllexport -std=c++0x -pthread -O2 -std=gnu++11 -Wall -W -Wextra -dM -E -o release\moc_predefs.h C:\Qt\5.10.1\mingw53_32\mkspecs\features\data\dummy.cpp
+	g++ -fno-keep-inline-dllexport -O2 -std=gnu++11 -Wall -W -Wextra -dM -E -o release\moc_predefs.h C:\Qt\5.10.1\mingw53_32\mkspecs\features\data\dummy.cpp
 
 compiler_moc_header_make_all: release/moc_automaton.cpp release/moc_grammar.cpp release/moc_stack.cpp release/moc_editor.cpp release/moc_input.cpp release/moc_main_window.cpp release/moc_table.cpp release/moc_text_area.cpp release/moc_tree.cpp
 compiler_moc_header_clean:
@@ -328,8 +328,8 @@ release/moc_automaton.cpp: C:/Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFileInfo \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QImage \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream \
 		src/inner/automaton.hpp \
 		release/moc_predefs.h \
 		C:/Qt/5.10.1/mingw53_32/bin/moc.exe
@@ -762,36 +762,8 @@ release/moc_editor.cpp: C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QMainWindow \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFileInfo \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
-		src/inner/grammar.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/QList \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QLabel \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlabel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qitemselectionmodel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyleoption.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QAbstractItemView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidgetItem \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
-		src/inner/rule.hpp \
-		src/inner/first_terminals.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QImage \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream \
 		src/gui/editor.hpp \
 		release/moc_predefs.h \
 		C:/Qt/5.10.1/mingw53_32/bin/moc.exe
@@ -909,18 +881,27 @@ release/moc_input.cpp: C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QMainWindow \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlayout.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgridlayout.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QLineEdit \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlineedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QPlainTextEdit \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qplaintextedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtextedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextdocument.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextcursor.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextformat.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qabstracttextdocumentlayout.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextlayout.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qglyphrun.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrawfont.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontdatabase.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QPushButton \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qpushbutton.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QDesktopWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdesktopwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QCloseEvent \
 		src/gui/report.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QObject \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
@@ -1057,6 +1038,10 @@ release/moc_main_window.cpp: C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QMenuBar 
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdir.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QTextDocument \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextdocument.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QScrollBar \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qscrollbar.h \
 		src/gui/tree.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QMainWindow \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qmainwindow.h \
@@ -1091,10 +1076,23 @@ release/moc_main_window.cpp: C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QMenuBar 
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFile \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFileInfo \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp \
-		src/inner/grammar.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/QList \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream \
+		src/gui/editor.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QPlainTextEdit \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qplaintextedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtextedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextcursor.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextformat.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qabstracttextdocumentlayout.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextlayout.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qglyphrun.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrawfont.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontdatabase.h \
+		src/gui/input.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QCloseEvent \
+		src/gui/table.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
@@ -1109,37 +1107,17 @@ release/moc_main_window.cpp: C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QMenuBar 
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QAbstractItemView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidgetItem \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
-		src/inner/rule.hpp \
-		src/inner/first_terminals.hpp \
-		src/gui/editor.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QPlainTextEdit \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qplaintextedit.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtextedit.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextdocument.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextcursor.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextformat.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qabstracttextdocumentlayout.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextlayout.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qglyphrun.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrawfont.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontdatabase.h \
-		src/gui/input.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QLineEdit \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlineedit.h \
-		src/gui/table.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QApplication \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qapplication.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qeventloop.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qguiapplication.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qinputmethod.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QAbstractItemView \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidgetItem \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/QMouseEvent \
 		src/inner/automaton.hpp \
 		src/inner/history.hpp \
@@ -1147,7 +1125,13 @@ release/moc_main_window.cpp: C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QMenuBar 
 		src/inner/stack.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStack \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstack.h \
+		src/inner/grammar.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QList \
+		src/inner/rule.hpp \
+		src/inner/first_terminals.hpp \
 		src/gui/text_area.hpp \
+		src/inner/parser.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp \
 		src/gui/main_window.hpp \
 		release/moc_predefs.h \
 		C:/Qt/5.10.1/mingw53_32/bin/moc.exe
@@ -1318,8 +1302,8 @@ release/moc_table.cpp: C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFileInfo \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QImage \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream \
 		src/gui/table.hpp \
 		release/moc_predefs.h \
 		C:/Qt/5.10.1/mingw53_32/bin/moc.exe
@@ -1592,33 +1576,7 @@ release/moc_tree.cpp: C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QMainWindow \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFile \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFileInfo \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp \
-		src/inner/grammar.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/QList \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qitemselectionmodel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyleoption.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QAbstractItemView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidgetItem \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
-		src/inner/rule.hpp \
-		src/inner/first_terminals.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream \
 		src/gui/tree.hpp \
 		release/moc_predefs.h \
 		C:/Qt/5.10.1/mingw53_32/bin/moc.exe
@@ -1774,6 +1732,10 @@ release/visualization.o: src/visualization.cpp C:/Qt/5.10.1/mingw53_32/include/Q
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdir.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QTextDocument \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextdocument.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QScrollBar \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qscrollbar.h \
 		src/gui/tree.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QMainWindow \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qmainwindow.h \
@@ -1807,10 +1769,23 @@ release/visualization.o: src/visualization.cpp C:/Qt/5.10.1/mingw53_32/include/Q
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFile \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFileInfo \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp \
-		src/inner/grammar.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/QList \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream \
+		src/gui/editor.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QPlainTextEdit \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qplaintextedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtextedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextcursor.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextformat.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qabstracttextdocumentlayout.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextlayout.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qglyphrun.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrawfont.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontdatabase.h \
+		src/gui/input.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QCloseEvent \
+		src/gui/table.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
@@ -1830,26 +1805,6 @@ release/visualization.o: src/visualization.cpp C:/Qt/5.10.1/mingw53_32/include/Q
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
-		src/inner/rule.hpp \
-		src/inner/first_terminals.hpp \
-		src/gui/editor.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QPlainTextEdit \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qplaintextedit.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtextedit.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextdocument.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextcursor.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextformat.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qabstracttextdocumentlayout.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextlayout.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qglyphrun.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrawfont.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontdatabase.h \
-		src/gui/input.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QLineEdit \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlineedit.h \
-		src/gui/table.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/QMouseEvent \
 		src/inner/automaton.hpp \
 		src/inner/history.hpp \
@@ -1857,7 +1812,13 @@ release/visualization.o: src/visualization.cpp C:/Qt/5.10.1/mingw53_32/include/Q
 		src/inner/stack.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStack \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstack.h \
-		src/gui/text_area.hpp
+		src/inner/grammar.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QList \
+		src/inner/rule.hpp \
+		src/inner/first_terminals.hpp \
+		src/gui/text_area.hpp \
+		src/inner/parser.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\visualization.o src\visualization.cpp
 
 release/automaton.o: src/inner/automaton.cpp src/inner/automaton.hpp \
@@ -2010,8 +1971,8 @@ release/automaton.o: src/inner/automaton.cpp src/inner/automaton.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFileInfo \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QImage \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\automaton.o src\inner\automaton.cpp
 
 release/first_terminals.o: src/inner/first_terminals.cpp src/inner/first_terminals.hpp \
@@ -2773,36 +2734,8 @@ release/editor.o: src/gui/editor.cpp src/gui/editor.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFileInfo \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
-		src/inner/grammar.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/QList \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QLabel \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlabel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qitemselectionmodel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyleoption.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QAbstractItemView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidgetItem \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
-		src/inner/rule.hpp \
-		src/inner/first_terminals.hpp
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QImage \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\editor.o src\gui\editor.cpp
 
 release/input.o: src/gui/input.cpp src/gui/input.hpp \
@@ -2918,18 +2851,27 @@ release/input.o: src/gui/input.cpp src/gui/input.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlayout.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgridlayout.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QLineEdit \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlineedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QPlainTextEdit \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qplaintextedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtextedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextdocument.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextcursor.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextformat.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qabstracttextdocumentlayout.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextlayout.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qglyphrun.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrawfont.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontdatabase.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QPushButton \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qpushbutton.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QDesktopWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdesktopwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QCloseEvent \
 		src/gui/report.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QObject \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
@@ -3064,6 +3006,10 @@ release/main_window.o: src/gui/main_window.cpp src/gui/main_window.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdir.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QTextDocument \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextdocument.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QScrollBar \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qscrollbar.h \
 		src/gui/tree.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QMainWindow \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qmainwindow.h \
@@ -3098,10 +3044,23 @@ release/main_window.o: src/gui/main_window.cpp src/gui/main_window.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFile \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFileInfo \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp \
-		src/inner/grammar.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/QList \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream \
+		src/gui/editor.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QPlainTextEdit \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qplaintextedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtextedit.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextcursor.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextformat.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qabstracttextdocumentlayout.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextlayout.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qglyphrun.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrawfont.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontdatabase.h \
+		src/gui/input.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QCloseEvent \
+		src/gui/table.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
@@ -3116,37 +3075,17 @@ release/main_window.o: src/gui/main_window.cpp src/gui/main_window.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QAbstractItemView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidgetItem \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
-		src/inner/rule.hpp \
-		src/inner/first_terminals.hpp \
-		src/gui/editor.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QPlainTextEdit \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qplaintextedit.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtextedit.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextdocument.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextcursor.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextformat.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qabstracttextdocumentlayout.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextlayout.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qglyphrun.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrawfont.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontdatabase.h \
-		src/gui/input.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QLineEdit \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlineedit.h \
-		src/gui/table.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QApplication \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qapplication.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qeventloop.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qguiapplication.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qinputmethod.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QAbstractItemView \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidgetItem \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/QMouseEvent \
 		src/inner/automaton.hpp \
 		src/inner/history.hpp \
@@ -3154,7 +3093,13 @@ release/main_window.o: src/gui/main_window.cpp src/gui/main_window.hpp \
 		src/inner/stack.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStack \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstack.h \
-		src/gui/text_area.hpp
+		src/inner/grammar.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QList \
+		src/inner/rule.hpp \
+		src/inner/first_terminals.hpp \
+		src/gui/text_area.hpp \
+		src/inner/parser.hpp \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main_window.o src\gui\main_window.cpp
 
 release/report.o: src/gui/report.cpp src/gui/report.hpp \
@@ -3439,8 +3384,8 @@ release/table.o: src/gui/table.cpp src/gui/table.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFileInfo \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QImage \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\table.o src\gui\table.cpp
 
 release/text_area.o: src/gui/text_area.cpp src/gui/text_area.hpp \
@@ -3709,33 +3654,7 @@ release/tree.o: src/gui/tree.cpp src/gui/tree.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFile \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QFileInfo \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp \
-		src/inner/grammar.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/QList \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qitemselectionmodel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyleoption.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QAbstractItemView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidgetItem \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
-		src/inner/rule.hpp \
-		src/inner/first_terminals.hpp
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\tree.o src\gui\tree.cpp
 
 release/file_worker.o: src/io/file_worker.cpp src/io/file_worker.hpp \
@@ -3797,90 +3716,40 @@ release/file_worker.o: src/io/file_worker.cpp src/io/file_worker.hpp \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qshareddata.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhash.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QIODevice \
-		src/inner/parser.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QRegExp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdebug.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmap.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qtextstream.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlocale.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvariant.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpoint.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qset.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcontiguouscache.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer_impl.h \
-		src/inner/grammar.hpp \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QObject \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/QList \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qevent.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/QImage \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qimage.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtguiglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtgui-config.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qregion.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrect.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmargins.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsize.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdatastream.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qkeysequence.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qurl.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qurlquery.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvector2d.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtouchdevice.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QLabel \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlabel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcolor.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgb.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgba64.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrect.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmargins.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsize.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpoint.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixelformat.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtransform.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qmatrix.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpolygon.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qregion.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdatastream.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qline.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtransform.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpainterpath.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qimage.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixelformat.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixmap.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfont.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontmetrics.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontinfo.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qsizepolicy.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcursor.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qitemselectionmodel.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyleoption.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qicon.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QAbstractItemView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidgetItem \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
-		src/inner/rule.hpp \
-		src/inner/first_terminals.hpp
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QTextStream \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qtextstream.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlocale.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvariant.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmap.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdebug.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qset.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcontiguouscache.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\file_worker.o src\io\file_worker.cpp
 
 release/moc_automaton.o: release/moc_automaton.cpp 

@@ -3,7 +3,7 @@
 const int MainWindow::MIN_HEIGHT = 690;
 const int MainWindow::MIN_WIDTH = 1280;
 
-MainWindow::MainWindow(): QMainWindow(), gTable(GRAMMAR_TABLE, &automaton), sTable(STACK_TABLE, &automaton), pTable(PARSING_TABLE, &automaton)
+MainWindow::MainWindow(): QMainWindow(), automaton(Input::DEFAULT_INPUT), gTable(GRAMMAR_TABLE, &automaton), sTable(STACK_TABLE, &automaton), pTable(PARSING_TABLE, &automaton)
 {
     setWindowTitle(tr("Vizualizace zpracování zásobníkového automatu"));
     setMinimumSize(MIN_WIDTH, MIN_HEIGHT);
@@ -22,10 +22,17 @@ MainWindow::MainWindow(): QMainWindow(), gTable(GRAMMAR_TABLE, &automaton), sTab
     QObject::connect(&automaton, SIGNAL(hasNewHistory()), this, SLOT(automatonHasHistory()));
     QObject::connect(&automaton, SIGNAL(hasNotHistory()), this, SLOT(automatonHasNotHistory()));
     QObject::connect(&automaton, SIGNAL(hasNextStep()), this, SLOT(automatonHasNext()));
+    
+    input = new Input(this);
+    QObject::connect(input, SIGNAL(changeInput(const QString &)), this, SLOT(setInput(const QString &)));
+    input->setAttribute(Qt::WA_DeleteOnClose, true);
 }
 
 MainWindow::~MainWindow()
 {
+    input->end();
+    input->close();
+    
     layout->deleteLater();
     widget->deleteLater();
 }
@@ -116,14 +123,22 @@ void MainWindow::createLayout()
     
     // Tlacitko pro upraveni vstupu bude pristupne vzdy.
     // Nikdy nebude vlozen prazdny retezec.
-    inputChanged();
     inputSetter.setObjectName("action");
     inputSetter.setProperty("button", "input");
     inputSetter.setCursor(Qt::PointingHandCursor);
     QObject::connect(&inputSetter, SIGNAL(clicked()), this, SLOT(updateInput()));
     processing.setObjectName("inputText");
     processingLayout.addWidget(&inputSetter);
-    processingLayout.addWidget(&processing);
+    scrollProcessing = new QScrollArea(this);
+    scrollProcessing->setMaximumHeight(74);
+    scrollProcessing->setMinimumHeight(74);
+    scrollProcessing->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    scrollProcessing->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scrollProcessing->setWidget(&processing);
+    processingLayout.addWidget(scrollProcessing);
+    // Zavolat manualne pro spravnost pocatecniho vzhledu.
+    inputChanged();
+    setProcessingWidth();
     
     
     
@@ -190,6 +205,8 @@ void MainWindow::createLayout()
     body->addLayout(&pLayout);
     
     
+    
+    messages.setMaximumHeight(150);
     
     layout = new QVBoxLayout;
     layout->setMargin(5);
@@ -269,12 +286,6 @@ void MainWindow::speedUp()
 
 void MainWindow::updateInput()
 {
-    QTextDocument text;
-    text.setHtml(processing.text());
-    
-    Input *input = new Input(this, text.toPlainText());
-    QObject::connect(input, SIGNAL(changeInput(const QString &)), this, SLOT(setInput(const QString &)));
-    input->setAttribute(Qt::WA_DeleteOnClose, true);
     input->show();
 }
 
@@ -283,6 +294,17 @@ void MainWindow::setInput(const QString &input)
     // Nejdrive ukoncit pripadne bezici animaci.
     resetAnimation();
     automaton.setInput(input);
+    inputChanged();
+    setProcessingWidth();
+}
+
+void MainWindow::setProcessingWidth()
+{
+    QTextDocument text;
+    text.setHtml(processing.text());
+    int widthAll = processing.fontMetrics().boundingRect(text.toPlainText()).width() + 20;
+    processing.setMinimumWidth(widthAll);
+    processing.setMaximumWidth(widthAll);
 }
 
 void MainWindow::chooseGrammar()
@@ -318,6 +340,8 @@ void MainWindow::setGrammar(const QString &grammar)
 {
     // Nejdrive ukoncit pripadne bezici animaci.
     resetAnimation();
+    gTable.setRowCount(0);
+    pTable.setRowCount(0);
     
     QString title = trUtf8("Načtení gramatiky");
     if (Parser::parseGrammar(automaton.getGrammar(), grammar))
@@ -331,14 +355,14 @@ void MainWindow::setGrammar(const QString &grammar)
         }
         else
         {
-            errorDialog(this, title, trUtf8("Vybraná gramatika není LL(1)."));
             buttonScenarioNoGrammar();
+            errorDialog(this, title, trUtf8("Vybraná gramatika není LL(1)."));
         }
     }
     else
     {
-        errorDialog(this, title, trUtf8("Vybraná gramatika má špatný formát."));
         buttonScenarioNoGrammar();
+        errorDialog(this, title, trUtf8("Vybraná gramatika má špatný formát."));
     }
 }
 
@@ -350,11 +374,11 @@ void MainWindow::showScenarios()
                                            trUtf8("03: \"<b>d d b c c c c</b>\"<br />") +
                                            trUtf8("04: \"<b>1 1 a 0 0</b>\"<br />") +
                                            trUtf8("06: \"<b>a a c b b</b>\"<br />") +
-                                           trUtf8("!!!07: \"<b>a c a a</b>\"<br />") +
-                                           trUtf8("!!!08: \"<b>[ [ [ ] ] [ ] ]</b>\"<br />") +
+                                           trUtf8("07: \"<b>a c a a</b>\"<br />") +
+                                           trUtf8("08: \"<b>[ [ [ ] ] [ ] ]</b>\"<br />") +
                                            trUtf8("09: \"<b>a + a</b>\"<br />") +
-                                           trUtf8("!!!10: \"<b>0 1 1 1 0 0</b>\"<br />") +
-                                           trUtf8("11: \"<b>n + n * n</b>\"<br />"));
+                                           trUtf8("11: \"<b>n + n * n</b>\"<br />") +
+                                           trUtf8("12: \"<b>( terminál plus terminál ) násobení terminál</b>\"<br />"));
 }
 
 void MainWindow::showAbout()
@@ -406,6 +430,18 @@ void MainWindow::inputChanged()
     processing.setText("<span style=\"color: #07A005;\">" + automaton.getDonePart() + "</span> " +
                        "<span style=\"font-style: italic; color: #FF9E00;\">" + automaton.getProcessingPart() + "</span> " +
                        "<span style=\"color: #D30000;\">" + automaton.getWaitingPart() + "</span>");
+    
+    if (gTable.rowCount() < 1)
+    {
+        buttonScenarioNoGrammar();
+    }
+    
+    int widthDone = processing.fontMetrics().boundingRect(automaton.getDonePart()).width() + 10;
+    int widthProcessing = processing.fontMetrics().boundingRect(automaton.getProcessingPart()).width() + 10;
+    
+    double centerProcessing = widthDone + widthProcessing / 2.0;
+    double centerView = scrollProcessing->viewport()->contentsRect().width() / 2.0;
+    scrollProcessing->horizontalScrollBar()->setValue(static_cast<int>(centerProcessing - centerView));
 }
 
 void MainWindow::buttonScenarioNoGrammar()

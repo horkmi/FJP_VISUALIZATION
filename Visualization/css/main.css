@@ -1,3 +1,14 @@
+
+/* --- VELIKOST TEXTU V EDITOR, INPUT A TEXTAREA --- */
+
+QPlainTextEdit {
+    font-size: 25px;
+}
+
+TextArea {
+    font-size: 12px;
+}
+
 /* --- PRO MOZNOST KOPIROVANI TEXTU --- */
 
 QMessageBox {
@@ -39,7 +50,8 @@ QLabel#control[value="not"] {
 QLabel#inputText {
     font-size: 30px;
     font-weight: bold;
-    margin-top: 20px;
+    padding-top: -1px;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 
