@@ -1,6 +1,6 @@
 #include "tree.hpp"
 
-const int Tree::MIN_HEIGHT = 800;
+const int Tree::MIN_HEIGHT = 700;
 const int Tree::MIN_WIDTH = 800;
 const int Tree::MILLI_TIME = 1000;
 const int Tree::MAX_STEP_WAITING = 10;
