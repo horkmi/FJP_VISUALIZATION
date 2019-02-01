@@ -69,19 +69,28 @@ bool Grammar::createTable()
         
         QList<int> forbidden;
         QList<int> followTerminals = follow(i + 1, forbidden);
-        for (int j = 0; j < followTerminals.size(); j++)
+        
+        if (followTerminals.size() < 1)
         {
-            int column = followTerminals.at(j) - 1;
-            // Pro jednoduchost kontrolovat dulicitni indexy az tady.
-            if (table[i][column] >= 0 && table[i][column] != mustBeFollow)
+            // Ve first() byl prazdny symbol, ale ve follow() nic neni -> pridat prechod pro konec vstupniho retezce.
+            table[i][getTerminalsSize()] = mustBeFollow;
+        }
+        else
+        {
+            for (int j = 0; j < followTerminals.size(); j++)
             {
-                // V dane bunce je uz jine cislo.
-                qDebug() << "FFL kolize = gramatika neni LL(1).";
-                return false;
-            }
-            else
-            {
-                table[i][column] = mustBeFollow;
+                int column = followTerminals.at(j) - 1;
+                // Pro jednoduchost kontrolovat dulicitni indexy az tady.
+                if (table[i][column] >= 0 && table[i][column] != mustBeFollow)
+                {
+                    // V dane bunce je uz jine cislo.
+                    qDebug() << "FFL kolize = gramatika neni LL(1).";
+                    return false;
+                }
+                else
+                {
+                    table[i][column] = mustBeFollow;
+                }
             }
         }
     }

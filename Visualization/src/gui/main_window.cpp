@@ -378,7 +378,7 @@ void MainWindow::showScenarios()
                                            trUtf8("08: \"<b>[ [ [ ] ] [ ] ]</b>\"<br />") +
                                            trUtf8("09: \"<b>a + a</b>\"<br />") +
                                            trUtf8("11: \"<b>n + n * n</b>\"<br />") +
-                                           trUtf8("12: \"<b>( terminál plus terminál ) násobení terminál</b>\"<br />"));
+                                           trUtf8("12: \"<b>( číslo + číslo ) * číslo</b>\"<br />"));
 }
 
 void MainWindow::showAbout()
